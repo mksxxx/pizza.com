@@ -1,6 +1,6 @@
-# Pizza.com (pizza-com)
+#
 
-Uma plataforma de pedidos para pizzarias
+Plataforma de cursos
 
 ## Install the dependencies
 
