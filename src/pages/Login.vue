@@ -1,10 +1,10 @@
 <script setup>
 import { ref } from 'vue'
-import { auth } from '../../firebase/firebase.js'
+import { auth } from '../firebase/firebase.js'
 import { useRouter } from 'vue-router'
-import { useUserStore } from '../../stores/userStore.js'
+import { useUserStore } from '../stores/userStore.js'
 import { signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth'
-import logo from '../../assets/pizza.com.png'
+import logo from '../assets/pizza.com.png'
 
 defineOptions({
     name: 'LoginPage' // nome multi-word
@@ -27,7 +27,6 @@ async function Login(event) {
          userStore.setUser({
             email: user.email
         })
-        alert(`Olá ${user.email}, login realizado com sucesso!`)
         router.push('/dashboard')
     } catch (error) {
         alert('Usuario invalido: ' + error.message)

@@ -5,7 +5,7 @@ const routes = [
   {
     path: "/",
     name: "login",
-    component: () => import('pages/login/Login.vue'),
+    component: () => import('pages/Login.vue'),
     meta: {layout: LayoutAuth}
   },
 

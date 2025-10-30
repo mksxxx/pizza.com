@@ -1,88 +1,85 @@
 <template>
-  <div>
-    <q-layout view="hHh Lpr lff" container style="height: 300px" class="shadow-2 ">
-      <q-header elevated :class="$q.dark.isActive ? 'bg-primary' : 'bg-black'">
-        <q-toolbar>
-          <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
-          <q-toolbar-title>Header</q-toolbar-title>
-        </q-toolbar>
-      </q-header>
+  <q-layout view="lHh Lpr lFf">
 
-      <q-drawer
-        v-model="drawer"
-        show-if-above
-        :width="200"
-        :breakpoint="500"
-      >
-        <q-scroll-area class="fit">
-          <q-list padding class="menu-list">
-            <q-item clickable v-ripple>
-              <q-item-section avatar>
-                <q-icon name="inbox" />
-              </q-item-section>
+    <!-- Cabeçalho -->
+    <q-header elevated>
+      <q-toolbar>
+        <q-toolbar-title>Cadastro</q-toolbar-title>
+      </q-toolbar>
+    </q-header>
 
-              <q-item-section>
-                Inbox
-              </q-item-section>
-            </q-item>
+    <!-- Container de páginas -->
+    <q-page-container>
+      <q-page padding class="bg-grey-2">
+        <q-card class="q-pa-md" style="max-width: 420px; margin: auto;">
+          <q-card-section class="text-center">
+            <div class="text-h6">Cadastro de Usuário</div>
+          </q-card-section>
 
-            <q-item active clickable v-ripple>
-              <q-item-section avatar>
-                <q-icon name="star" />
-              </q-item-section>
+          <q-card-section>
+            <q-form @submit.prevent="onSubmit" class="q-gutter-md">
+              <q-input
+                filled
+                v-model="form.nome"
+                label="Nome completo"
+                :rules="[val => !!val || 'Informe o nome']"
+              />
+              <q-input
+                filled
+                v-model="form.email"
+                type="email"
+                label="E-mail"
+                :rules="[val => !!val || 'Informe o e-mail']"
+              />
+              <q-input
+                filled
+                v-model="form.senha"
+                type="password"
+                label="Senha"
+                :rules="[val => val && val.length >= 6 || 'Mínimo de 6 caracteres']"
+              />
 
-              <q-item-section>
-                Star
-              </q-item-section>
-            </q-item>
+              <div class="flex justify-end q-mt-md">
+                <q-btn label="Cadastrar" color="primary" type="submit" />
+              </div>
+            </q-form>
+          </q-card-section>
+        </q-card>
+      </q-page>
+    </q-page-container>
 
-            <q-item clickable v-ripple>
-              <q-item-section avatar>
-                <q-icon name="send" />
-              </q-item-section>
-
-              <q-item-section>
-                Send
-              </q-item-section>
-            </q-item>
-
-            <q-item clickable v-ripple>
-              <q-item-section avatar>
-                <q-icon name="drafts" />
-              </q-item-section>
-
-              <q-item-section>
-                Drafts
-              </q-item-section>
-            </q-item>
-          </q-list>
-        </q-scroll-area>
-      </q-drawer>
-
-      <q-page-container>
-        <q-page padding>
-          <p v-for="n in 15" :key="n">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit nihil praesentium molestias a adipisci, dolore vitae odit, quidem consequatur optio voluptates asperiores pariatur eos numquam rerum delectus commodi perferendis voluptate?
-          </p>
-        </q-page>
-      </q-page-container>
-    </q-layout>
-  </div>
+  </q-layout>
 </template>
 
-<script>
+<script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { auth } from '../firebase/firebase'
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 
-export default {
-  setup () {
-    return {
-      drawer: ref(false)
-    }
+const router = useRouter() // podemos usar para redirecionar depois
+
+const form = ref({
+  nome: '',
+  email: '',
+  senha: ''
+})
+
+const onSubmit = async () => {
+  try {
+    const cred = await createUserWithEmailAndPassword(auth, form.value.email, form.value.senha)
+    const user = cred.user
+
+    await updateProfile(user, { displayName: form.value.nome })
+
+    alert('Usuário cadastrado com sucesso!')
+    console.log('Usuário criado:', user)
+
+    // Redireciona para dashboard
+    router.push('/dashboard')
+  } catch (err) {
+    console.error('Erro ao cadastrar usuário:', err)
+    alert('Erro ao cadastrar: ' + err.message)
   }
 }
 </script>
-
-<style lang="sass" scoped>
-.menu-list .q-item
-  border-radius: 0 32px 32px 0
-</style>
