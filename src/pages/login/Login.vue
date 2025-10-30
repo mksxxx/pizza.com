@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { auth } from '../../firebase/firebase.js'
 import { useRouter } from 'vue-router'
+import { useUserStore } from '../../stores/userStore.js'
 import { signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth'
 import logo from '../../assets/pizza.com.png'
 
@@ -12,6 +13,7 @@ defineOptions({
 const router = useRouter()
 const email = ref('')
 const password = ref('')
+const userStore = useUserStore()
 
 //login function
 
@@ -22,6 +24,9 @@ async function Login(event) {
     try {
         const credentialUsers = await signInWithEmailAndPassword(auth, email.value, password.value)
         const user = credentialUsers.user
+         userStore.setUser({
+            email: user.email
+        })
         alert(`Olá ${user.email}, login realizado com sucesso!`)
         router.push('/dashboard')
     } catch (error) {

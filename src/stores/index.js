@@ -10,6 +10,8 @@ import { createPinia } from 'pinia'
  * with the Store instance.
  */
 
+
+
 export default defineStore((/* { ssrContext } */) => {
   const pinia = createPinia()
 
