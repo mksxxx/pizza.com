@@ -1,5 +1,4 @@
 import LayoutAuth from "src/layouts/LayoutAuth.vue";
-import LayoutDefoult from "src/layouts/LayoutDefoult.vue";
 import MainLayout from "src/layouts/MainLayout.vue";
 
 const routes = [
@@ -11,16 +10,16 @@ const routes = [
   },
 
   {
-    path: "/sidebar",
-    name: "Sidebar",
-    component: () => import('components/SidebarMenu.vue'),
+    path: "/dashboard",
+    name: "Dashboard",
+    component: () => import('pages/DashBoardPage.vue'),
     meta: {layout: MainLayout}
   },
   {
     path: "/teste",
     name: "TestePage",
-    component: () => import('pages/PageTeste1.vue'),
-    meta:{layout: LayoutDefoult}
+    component: () => import('pages/TestePage.vue'),
+    meta:{layout: MainLayout}
   }
 ]
 

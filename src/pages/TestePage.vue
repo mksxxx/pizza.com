@@ -1,8 +1,6 @@
-
-
 <template>
   <div>
-    <q-layout view="hHh Lpr lff" container style="height: 100vh" class="shadow-2 rounded-borders">
+    <q-layout view="hHh Lpr lff" container style="height: 300px" class="shadow-2 ">
       <q-header elevated :class="$q.dark.isActive ? 'bg-primary' : 'bg-black'">
         <q-toolbar>
           <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
@@ -13,7 +11,7 @@
       <q-drawer
         v-model="drawer"
         show-if-above
-        :width="100"
+        :width="200"
         :breakpoint="500"
       >
         <q-scroll-area class="fit">
@@ -72,61 +70,19 @@
   </div>
 </template>
 
-<script setup>
+<script>
 import { ref } from 'vue'
-const drawer = ref(false)
+
+export default {
+  setup () {
+    return {
+      drawer: ref(false)
+    }
+  }
+}
 </script>
 
 <style lang="sass" scoped>
 .menu-list .q-item
   border-radius: 0 32px 32px 0
-
-  nav a {
-  color: var(--icon-color);
-  font-size: 22px;
-  transition: color 0.3s ease, transform 0.3s ease;
-}
-
-nav a:hover {
-  color: var(--icon-hover);
-  transform: scale(1.15);
-}
-
-/* BOTÃO SAIR */
-.logout {
-  margin-bottom: 25px;
-}
-
-#logoutBtn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 10px;
-  margin: 5px;
-  transition: color 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-
-#logoutBtn i.fa {
-  font-size: 20px;
-  color: #495057;
-}
-
-
-#logoutBtn:hover {
-  color: var(--icon-hover);
-}
-
-
-#logoutBtn:hover i.fa {
-  color: var(--icon-hover);
-}
-
-
-#logoutBtn:active {
-  opacity: 0.8;
-}
 </style>

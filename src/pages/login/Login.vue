@@ -23,7 +23,7 @@ async function Login(event) {
         const credentialUsers = await signInWithEmailAndPassword(auth, email.value, password.value)
         const user = credentialUsers.user
         alert(`Olá ${user.email}, login realizado com sucesso!`)
-        router.push('/sidebar')
+        router.push('/dashboard')
     } catch (error) {
         alert('Usuario invalido: ' + error.message)
     }
@@ -100,16 +100,12 @@ async function ResetPassword() {
     align-items: center;
 }
 
-
-
 body {
     font-family: "Poppins", sans-serif;
     background-color: var(--background);
     display: flex;
     align-items: center;
 }
-
-
 
 .login-form {
     background-color: var(--background-login);
@@ -129,15 +125,10 @@ body {
     margin-bottom: 0px;
 }
 
-
-
 p {
     color: #474a49;
     margin-bottom: 10px;
 }
-
-
-
 
 .form-group {
     display: flex;
@@ -145,34 +136,27 @@ p {
     margin-bottom: 25px;
 }
 
-
 .input-container {
     position: relative;
     flex: 1;
 }
 
-.input.q-field--standard .q-field__line {
-    background-color: #00532e !important;
+.input.q-field--standard .q-field__control::after {
+  background: #00532e !important;  /* Cor do input dps de perder o foco*/
 }
 
 .input.q-field--focused .q-field__control::after {
-    background-color: #00532e !important;
+  background: #00532e !important; /* Cor do input qnd ganha o foco*/
 }
 
-.input.q-field--float .q-field__line {
-    background-color: #00532e !important;
-}
 
 .input.q-field--float .q-field__label {
-    color: #00532e !important;
+    color: #00532e !important; /*Cor do texto do label*/
 }
 
 .input .q-field__native {
-    caret-color: #00532e !important;
-    color: #00532e;
+    color: #2b2a2a; /*Cor do texto q o input vai receber*/
 }
-
-
 
 .btncustom {
     width: 100%;
@@ -184,25 +168,21 @@ p {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.5s ease;
-
 }
 
 .forgot-password-link {
     display: block;
-    /* Para que ele ocupe uma linha inteira e o text-align funcione */
     text-align: right;
     margin-top: -15px;
-    /* Puxa para cima para ficar mais próximo do campo de senha */
     margin-bottom: 20px;
-    /* Espaço antes do botão Entrar */
     font-size: 0.9em;
     color: #1976D2;
-    /* Cor primária do Quasar */
     text-decoration: none;
-    /* Remove sublinhado */
 }
 
 .forgot-password-link:hover {
     text-decoration: underline;
 }
+
+
 </style>
