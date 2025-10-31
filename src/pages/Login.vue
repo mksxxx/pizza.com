@@ -154,6 +154,7 @@ p {
 }
 
 
+
 .input.q-field--float .q-field__label {
     color: #00532e !important; /*Cor do texto do label*/
 }

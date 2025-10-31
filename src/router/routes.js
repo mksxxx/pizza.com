@@ -1,5 +1,5 @@
 import LayoutAuth from "src/layouts/LayoutAuth.vue";
-import MainLayout from "src/layouts/MainLayout.vue";
+import LayoutDefoult from "src/layouts/LayoutDefoult.vue";
 
 const routes = [
   {
@@ -13,13 +13,13 @@ const routes = [
     path: "/dashboard",
     name: "Dashboard",
     component: () => import('pages/DashBoardPage.vue'),
-    meta: {layout: MainLayout}
+    meta: {layout: LayoutDefoult}
   },
   {
-    path: "/teste",
-    name: "TestePage",
+    path: "/cadastro",
+    name: "CadastroPage",
     component: () => import('pages/TestePage.vue'),
-    meta:{layout: MainLayout}
+    meta:{layout: LayoutDefoult}
   }
 ]
 
