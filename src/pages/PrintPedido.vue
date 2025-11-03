@@ -13,7 +13,7 @@
     </div>
 
     <div class="text-center q-mt-md">
-      <q-btn label="Imprimir Pedido" color="primary" @click="imprimirPedido" />
+      <q-btn label="Imprimir Pedido" class="b btncustom" @click="imprimirPedido" />
     </div>
   </q-page>
 </template>
@@ -49,5 +49,17 @@ const imprimirPedido = () => {
   font-family: monospace;
   white-space: pre-line;
   font-size: 14px;
+}
+
+.btncustom {
+    width: 100%;
+    background-color: #00532e;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
 }
 </style>
