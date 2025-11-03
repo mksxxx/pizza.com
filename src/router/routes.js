@@ -18,7 +18,13 @@ const routes = [
   {
     path: "/cadastro",
     name: "CadastroPage",
-    component: () => import('pages/TestePage.vue'),
+    component: () => import('src/pages/RegisterUser.vue'),
+    meta:{layout: LayoutDefoult}
+  },
+  {
+    path: "/pedidos",
+    name: "PedidosPage",
+    component: () => import('src/pages/PrintPedido.vue'),
     meta:{layout: LayoutDefoult}
   }
 ]

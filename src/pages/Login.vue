@@ -14,11 +14,15 @@ const router = useRouter()
 const email = ref('')
 const password = ref('')
 const userStore = useUserStore()
+const rememberMe = ref(false)
+
+//Remember-me na tela de login
+if(localStorage.getItem('rememberedEmail')){
+    email.value = localStorage.getItem('remeberedEmail')
+    rememberMe.value = true
+}
 
 //login function
-
-
-
 async function Login(event) {
     event.preventDefault();
     try {
@@ -27,22 +31,26 @@ async function Login(event) {
          userStore.setUser({
             email: user.email
         })
+
+        if (rememberMe.value){
+            localStorage.setItem('rememberedEmail', email.value)
+        } else{
+            localStorage.removeItem('rememberedEmail')
+        }
         router.push('/dashboard')
     } catch (error) {
         alert('Usuario invalido: ' + error.message)
     }
 }
 
+//resete de senha
 async function ResetPassword() {
-    // 1. Verifica se o campo de e-mail está preenchido
     if (!email.value) {
         alert('Por favor, digite seu e-mail para receber as instruções de recuperação.');
         return;
     }
-
     try {
         await sendPasswordResetEmail(auth, email.value);
-
         alert(`Um e-mail de recuperação de senha foi enviado para ${email.value}. Verifique sua caixa de entrada.`);
     } catch (error) {
         console.error("Erro ao enviar e-mail de recuperação:", error.message);
@@ -73,6 +81,13 @@ async function ResetPassword() {
                 <div class="input-container">
                     <q-input v-model="password" label="Digite sua senha" type="password" class="input" />
                 </div>
+            </div>
+
+            <div class="form-group">
+                <label style="font-size:  0.9em;">
+                     <input type="checkbox" v-model="rememberMe" />
+                    Lembrar de mim
+                </label>
             </div>
             <a href="#" class="forgot-password-link" @click.prevent="ResetPassword">Esqueci minha senha</a>
 

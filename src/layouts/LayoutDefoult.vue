@@ -73,7 +73,8 @@
             <q-item-section>Perfil</q-item-section>
           </q-item>
 
-          <q-item clickable v-ripple>
+           <q-item to="/pedidos" clickable v-ripple>
+            
             <q-item-section avatar>
               <q-icon name="drafts" />
             </q-item-section>
@@ -186,6 +187,3 @@ function handleLogout() {
   object-fit: cover;
 }
 </style>
-
-
-Com estas mudanças, o painel lateral (`Q-Drawer`) agora busca ativamente e exibe o nome, e-mail e a imagem Base64 do usuário logado, diretamente do seu Firebase Realtime Database.
