@@ -18,7 +18,7 @@ const rememberMe = ref(false)
 
 //Remember-me na tela de login
 if(localStorage.getItem('rememberedEmail')){
-    email.value = localStorage.getItem('remeberedEmail')
+    email.value = localStorage.getItem('rememberedEmail')
     rememberMe.value = true
 }
 

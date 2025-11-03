@@ -69,8 +69,6 @@ const router = useRouter()
 
 const permissionOptions = [
   'Administrador',
-  'Gerente',
-  'Colaborador',
   'Usuário Básico'
 ]
 

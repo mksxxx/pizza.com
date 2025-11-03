@@ -16,6 +16,12 @@ const routes = [
     meta: {layout: LayoutDefoult}
   },
   {
+    path: "/usuarios",
+    name: "UsuariosPage",
+    component: () => import('src/pages/ListUsers.vue'),
+    meta:{layout: LayoutDefoult}
+  },
+  {
     path: "/cadastro",
     name: "CadastroPage",
     component: () => import('src/pages/RegisterUser.vue'),
