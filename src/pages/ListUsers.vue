@@ -50,7 +50,7 @@
 
     <!-- Botão flutuante -->
     <q-page-sticky position="bottom-right" :offset="[18, 18]">
-      <q-btn round color="primary" icon="add" @click="irParaCadastro" />
+      <q-btn round class="btncustom" icon="add" @click="irParaCadastro" />
     </q-page-sticky>
   </q-page>
 </template>
@@ -128,5 +128,10 @@ const irParaCadastro = () => {
 
 .q-item:hover {
   background-color: #f5f5f5;
+}
+
+.btncustom{
+   background-color: #00532e;
+   border-radius: 30px;
 }
 </style>

@@ -32,7 +32,21 @@ const routes = [
     name: "PedidosPage",
     component: () => import('src/pages/PrintPedido.vue'),
     meta:{layout: LayoutDefoult}
+  },
+  {
+    path:"/produtos",
+    name:"ProdutosPage",
+    component: () => import('src/pages/ListProduct.vue'),
+    meta:{layout: LayoutDefoult}
+  },
+  {
+    path:"/cadastro-produtos",
+    name:"CadastroProdutosPage",
+    component: () => import('src/pages/RegisterProduct.vue'),
+    meta:{layout: LayoutDefoult}
   }
+  
+
 ]
 
 export default routes
