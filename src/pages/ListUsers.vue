@@ -2,13 +2,7 @@
   <q-page class="bg-grey-1">
     <!-- Barra de busca -->
     <q-toolbar class="bg-white q-pa-sm shadow-1">
-      <q-input
-        filled
-        v-model="filtro"
-        label="Buscar Usuário"
-        dense
-        clearable
-      >
+      <q-input filled v-model="filtro" label="Buscar Usuário" dense clearable>
         <template v-slot:prepend>
           <q-icon name="search" />
         </template>
@@ -16,36 +10,28 @@
     </q-toolbar>
 
     <!-- Lista de usuários -->
-    <q-list bordered separator>
-      <q-item
-        v-for="user in usuariosFiltrados"
-        :key="user.uid"
-        clickable
-        v-ripple
-      >
-        <q-item-section avatar>
-          <q-avatar>
-            <img
-              :src="user.avatarBase64 || 'https://cdn.quasar.dev/img/avatar.png'"
-              alt="Avatar"
-            />
-          </q-avatar>
-        </q-item-section>
+      <q-list bordered separator>
+    <q-item v-for="user in usuariosFiltrados" :key="user.uid" clickable v-ripple @click="editarUsuario(user)">
+      <q-item-section avatar>
+        <q-avatar>
+          <img :src="user.avatarBase64 || 'https://cdn.quasar.dev/img/avatar.png'" alt="Avatar" />
+        </q-avatar>
+      </q-item-section>
 
-        <q-item-section>
-          <q-item-label class="text-weight-medium">{{ user.nome }}</q-item-label>
-          <q-item-label caption>{{ user.email }}</q-item-label>
-        </q-item-section>
+      <q-item-section>
+        <q-item-label class="text-weight-medium">{{ user.nome }}</q-item-label>
+        <q-item-label caption>{{ user.email }}</q-item-label>
+      </q-item-section>
 
-        <q-item-section side>
-          <q-icon name="chevron_right" />
-        </q-item-section>
-      </q-item>
+      <q-item-section side>
+        <q-icon name="chevron_right" />
+      </q-item-section>
+    </q-item>
 
-      <!-- Caso não haja usuários -->
-      <div v-if="usuariosFiltrados.length === 0" class="text-center q-pa-lg text-grey">
-        Nenhum usuário encontrado.
-      </div>
+    <!-- Caso não haja usuários -->
+    <div v-if="usuariosFiltrados.length === 0" class="text-center q-pa-lg text-grey">
+      Nenhum usuário encontrado.
+    </div>
     </q-list>
 
     <!-- Botão flutuante -->
@@ -74,7 +60,7 @@ onMounted(() => {
     (snapshot) => {
       const data = snapshot.val()
       if (data) {
-        
+
         usuarios.value = Object.entries(data).map(([uid, user]) => ({
           uid,
           nome: user.nome || 'Sem nome',
@@ -113,6 +99,10 @@ const usuariosFiltrados = computed(() => {
 const irParaCadastro = () => {
   router.push('/cadastro')
 }
+
+const editarUsuario = (user) => {
+  router.push({ path: '/editar-usuarios', query: { id: user.uid } })
+}
 </script>
 
 <style scoped>
@@ -130,8 +120,8 @@ const irParaCadastro = () => {
   background-color: #f5f5f5;
 }
 
-.btncustom{
-   background-color: #00532e;
-   border-radius: 30px;
+.btncustom {
+  background-color: #00532e;
+  border-radius: 30px;
 }
 </style>

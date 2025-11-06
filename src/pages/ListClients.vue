@@ -5,7 +5,7 @@
       <q-input
         filled
         v-model="filtro"
-        label="Buscar Produto"
+        label="Buscar Cliente"
         dense
         clearable
       >
@@ -15,51 +15,51 @@
       </q-input>
     </q-toolbar>
 
-    <!-- Lista de produtos -->
+    <!-- Lista de clientes -->
     <q-list bordered separator>
       <q-item
-        v-for="produto in produtosFiltrados"
-        :key="produto.id"
+        v-for="cliente in clientesFiltrados"
+        :key="cliente.id"
         clickable
         v-ripple
-        @click="editarProduto(produto)"
+         @click="editarCliente(cliente)"
       >
-        <!-- Avatar do produto -->
+        <!-- Avatar do cliente -->
         <q-item-section avatar>
           <q-avatar size="48px">
             <img
-              v-if="produto.imagemBase64"
-              :src="produto.imagemBase64"
-              alt="Imagem do produto"
+              v-if="cliente.imagemBase64"
+              :src="cliente.imagemBase64"
+              alt="Foto do cliente"
             />
             <q-icon
               v-else
-              name="inventory_2"
+              name="person"
               color="green-10"
               size="32px"
             />
           </q-avatar>
         </q-item-section>
 
-        <!-- Dados do produto -->
+        <!-- Dados do cliente -->
         <q-item-section>
           <q-item-label class="text-weight-medium">
-            {{ produto.nome }}
+            {{ cliente.nome }}
           </q-item-label>
           <q-item-label caption>
-            💰 R$ {{ produto.preco?.toFixed(2) || '0,00' }} — 📦 Estoque: {{ produto.estoque || 0 }}
+            📞 {{ cliente.telefone || 'Sem telefone' }} — ✉️ {{ cliente.email || 'Sem e-mail' }}
           </q-item-label>
         </q-item-section>
 
-        <!-- Ícone lateral -->
-        <q-item-section side>
-          <q-icon name="chevron_right" color="grey-7" />
-        </q-item-section>
-      </q-item>
+        <!-- Botões -->
+      <q-item-section side>
+    <q-icon name="chevron_right" color="grey-7" />
+  </q-item-section>
+</q-item>
 
-      <!-- Caso não haja produtos -->
-      <div v-if="produtosFiltrados.length === 0" class="text-center q-pa-lg text-grey">
-        Nenhum produto encontrado.
+      <!-- Caso não haja clientes -->
+      <div v-if="clientesFiltrados.length === 0" class="text-center q-pa-lg text-grey">
+        Nenhum cliente encontrado.
       </div>
     </q-list>
 
@@ -74,41 +74,50 @@
 import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { database } from '../firebase/firebase'
-import { ref as dbRef, onValue } from 'firebase/database'
+import { ref as dbRef, onValue, /*remove*/ } from 'firebase/database'
 
 const router = useRouter()
-const produtos = ref([])
+const clientes = ref([])
 const filtro = ref('')
 
-// 🔹 Carrega os produtos do Firebase
+// 🔹 Carrega os clientes do Firebase
 onMounted(() => {
-  const produtosRef = dbRef(database, 'products')
-  onValue(produtosRef, (snapshot) => {
+  const clientesRef = dbRef(database, 'clients')
+  onValue(clientesRef, (snapshot) => {
     const data = snapshot.val()
-    produtos.value = data
+    clientes.value = data
       ? Object.keys(data).map(id => ({ id, ...data[id] }))
       : []
   })
 })
 
 // 🔹 Filtro de busca
-const produtosFiltrados = computed(() => {
+const clientesFiltrados = computed(() => {
   const texto = filtro.value.trim().toLowerCase()
-  if (!texto) return produtos.value
+  if (!texto) return clientes.value
 
-  return produtos.value.filter(
-    (p) =>
-      p.nome?.toLowerCase().includes(texto) ||
-      p.preco?.toString().includes(texto)
+  return clientes.value.filter(
+    (c) =>
+      c.nome?.toLowerCase().includes(texto) ||
+      c.email?.toLowerCase().includes(texto) ||
+      c.telefone?.toLowerCase().includes(texto)
   )
 })
 
 // 🔹 Ações
-const irParaCadastro = () => router.push('/cadastro-produtos')
+const irParaCadastro = () => router.push('/cadastro-clientes')
 
-const editarProduto = (produto) => {
-  router.push({ path: '/editar-produtos', query: { id: produto.id } })
+const editarCliente = (cliente) => {
+  router.push({ path: '/editar-clientes', query: { id: cliente.id } })
 }
+/*
+const removerCliente = async (cliente) => {
+  if (confirm(`Deseja remover o cliente "${cliente.nome}"?`)) {
+    await remove(dbRef(database, 'clients/' + cliente.id))
+    alert('Cliente removido com sucesso!')
+  }
+}
+  */
 </script>
 
 <style scoped>

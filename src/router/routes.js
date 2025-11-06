@@ -22,9 +22,58 @@ const routes = [
     meta:{layout: LayoutDefoult}
   },
   {
+    path: "/editar-usuarios",
+    name: "EditarUsuariosPage",
+    component: () => import('src/pages/EditUsers.vue'),
+    meta:{layout: LayoutDefoult}
+  },
+  {
     path: "/cadastro",
     name: "CadastroPage",
     component: () => import('src/pages/RegisterUser.vue'),
+    meta:{layout: LayoutDefoult}
+  },
+  
+  {
+    path:"/produtos",
+    name:"ProdutosPage",
+    component: () => import('src/pages/ListProduct.vue'),
+    meta:{layout: LayoutDefoult}
+  },
+   {
+    path:"/editar-produtos",
+    name:"EditarProdutosPage",
+    component: () => import('src/pages/EditProducts.vue'),
+    meta:{layout: LayoutDefoult}
+  },
+  {
+    path:"/cadastro-produtos",
+    name:"CadastroProdutosPage",
+    component: () => import('src/pages/RegisterProduct.vue'),
+    meta:{layout: LayoutDefoult}
+  },
+  {
+    path: "/clientes",
+    name: "ClientesPage",
+    component: () => import('src/pages/ListClients.vue'),
+    meta:{layout: LayoutDefoult}
+  },
+  {
+    path: "/cadastro-clientes",
+    name: "CadastroClientesPage",
+    component: () => import('src/pages/RegisterClientes.vue'),
+    meta:{layout: LayoutDefoult}
+  },
+  {
+    path: "/editar-clientes",
+    name: "EditarClientesPage",
+    component: () => import('src/pages/EditClients.vue'),
+    meta:{layout: LayoutDefoult}
+  },
+  {
+    path: "/editar-usuario",
+    name: "EditarUsuarioPage",
+    component: () => import('src/pages/EditUser.vue'),
     meta:{layout: LayoutDefoult}
   },
   {
@@ -33,18 +82,6 @@ const routes = [
     component: () => import('src/pages/PrintPedido.vue'),
     meta:{layout: LayoutDefoult}
   },
-  {
-    path:"/produtos",
-    name:"ProdutosPage",
-    component: () => import('src/pages/ListProduct.vue'),
-    meta:{layout: LayoutDefoult}
-  },
-  {
-    path:"/cadastro-produtos",
-    name:"CadastroProdutosPage",
-    component: () => import('src/pages/RegisterProduct.vue'),
-    meta:{layout: LayoutDefoult}
-  }
   
 
 ]

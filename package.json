@@ -1,8 +1,8 @@
 {
   "name": "top-videos",
   "version": "0.0.1",
-  "description": "Plataforma de cursos",
-  "productName": "topvideos",
+  "description": "Plataforma de pedidos",
+  "productName": "Pizza.com",
   "author": "Marcos Vinicius <marcos.10823460@gmail.com>",
   "type": "module",
   "private": true,

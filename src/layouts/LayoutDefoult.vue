@@ -53,13 +53,14 @@
               <q-item-section>Produtos</q-item-section>
             </q-item>
 
-            <q-item clickable v-ripple>
+            <q-item to="/clientes" clickable v-ripple>
+              
               <q-item-section avatar><q-icon name="people" /></q-item-section>
               <q-item-section>Clientes</q-item-section>
             </q-item>
           </q-expansion-item>
 
-          <q-item clickable v-ripple>
+          <q-item to="/editar-usuario" v-if="avatarData.permissao === 'Usuario-Basico'" clickable v-ripple>
             <q-item-section avatar><q-icon name="account_circle" /></q-item-section>
             <q-item-section>Perfil</q-item-section>
           </q-item>
